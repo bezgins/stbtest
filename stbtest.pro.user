@@ -1,0 +1,376 @@
+<!DOCTYPE QtCreatorProject>
+<qtcreator>
+ <data>
+  <variable>RunConfiguration0-BaseEnvironmentBase</variable>
+  <value type="int">2</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-CommandLineArguments</variable>
+  <valuelist type="QVariantList"/>
+ </data>
+ <data>
+  <variable>RunConfiguration0-ProFile</variable>
+  <value type="QString">stbtest.pro</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-RunConfiguration.name</variable>
+  <value type="QString">stbtest</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UseDyldImageSuffix</variable>
+  <value type="bool">false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UseTerminal</variable>
+  <value type="bool">false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserEnvironmentChanges</variable>
+  <valuelist type="QVariantList"/>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserSetName</variable>
+  <value type="bool">false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserSetWorkingDirectory</variable>
+  <value type="bool">false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserWorkingDirectory</variable>
+  <value type="QString"></value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-type</variable>
+  <value type="QString">Qt4ProjectManager.Qt4RunConfiguration</value>
+ </data>
+ <data>
+  <variable>activeRunConfiguration</variable>
+  <value type="int">0</value>
+ </data>
+ <data>
+  <variable>activebuildconfiguration</variable>
+  <value type="QString">Release</value>
+ </data>
+ <data>
+  <variable>buildConfiguration-Debug</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Debug</value>
+   <value key="QtVersionId" type="int">0</value>
+   <value key="ToolChain" type="int">0</value>
+   <value key="addQDumper" type=""></value>
+   <value key="buildConfiguration" type="int">2</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildConfiguration-Release</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <value key="QtVersionId" type="int">0</value>
+   <value key="ToolChain" type="int">0</value>
+   <value key="addQDumper" type=""></value>
+   <value key="buildConfiguration" type="int">0</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Debug-buildstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Debug</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-25Xv9GDSTP,guid=5ac6f1bc4ce83bba2e56f4d50000002d</value>
+    <value type="QString">DESKTOP_SESSION=kde</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">DM_CONTROL=/var/run/xdmctl</value>
+    <value type="QString">GS_LIB=/home/kirdyk/.fonts</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/kirdyk/.gtkrc-2.0::/home/kirdyk/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK_MODULES=canberra-gtk-module</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/kirdyk/.gtkrc::/home/kirdyk/.kde/share/config/gtkrc</value>
+    <value type="QString">HOME=/home/kirdyk</value>
+    <value type="QString">KDE_FULL_SESSION=true</value>
+    <value type="QString">KDE_MULTIHEAD=false</value>
+    <value type="QString">KDE_SESSION_UID=1000</value>
+    <value type="QString">KDE_SESSION_VERSION=4</value>
+    <value type="QString">LANG=ru_RU.UTF-8</value>
+    <value type="QString">LANGUAGE=</value>
+    <value type="QString">LD_LIBRARY_PATH=/usr/lib/qtcreator</value>
+    <value type="QString">LOGNAME=kirdyk</value>
+    <value type="QString">PATH=/usr/local/Trolltech/QtEmbedded-4.6.0-generic/bin:/usr/local/bin:/usr/bin:/bin:/usr/games</value>
+    <value type="QString">PWD=/home/kirdyk/Documents</value>
+    <value type="QString">QTDIR=/usr/local/Trolltech/QtEmbedded-4.6.0-generic</value>
+    <value type="QString">QT_PLUGIN_PATH=/home/kirdyk/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
+    <value type="QString">SESSION_MANAGER=local/debian:@/tmp/.ICE-unix/2571,unix/debian:/tmp/.ICE-unix/2571</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=1</value>
+    <value type="QString">SSH_AGENT_PID=2476</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-lVWogF2435/agent.2435</value>
+    <value type="QString">USER=kirdyk</value>
+    <value type="QString">WINDOWPATH=7</value>
+    <value type="QString">XCURSOR_THEME=Oxygen_Black</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
+    <value type="QString">XDG_SESSION_COOKIE=6ebc389e7364e9cd00c2e5354ae45b39-1295638179.132052-193475656</value>
+    <value type="QString">XDM_MANAGED=method=classic</value>
+   </valuelist>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">/home/kirdyk/stbtest/stbtest.pro</value>
+    <value type="QString">-spec</value>
+    <value type="QString">/usr/local/Trolltech/QtEmbedded-4.6.0-generic/mkspecs/qws/linux-sh4-g++</value>
+    <value type="QString">-r</value>
+    <value type="QString">CONFIG+=debug</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/local/Trolltech/QtEmbedded-4.6.0-generic/bin/qmake</value>
+   <value key="abstractProcess.enabled" type="bool">false</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/kirdyk/stbtest</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Debug-buildstep1</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Debug</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-25Xv9GDSTP,guid=5ac6f1bc4ce83bba2e56f4d50000002d</value>
+    <value type="QString">DESKTOP_SESSION=kde</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">DM_CONTROL=/var/run/xdmctl</value>
+    <value type="QString">GS_LIB=/home/kirdyk/.fonts</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/kirdyk/.gtkrc-2.0::/home/kirdyk/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK_MODULES=canberra-gtk-module</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/kirdyk/.gtkrc::/home/kirdyk/.kde/share/config/gtkrc</value>
+    <value type="QString">HOME=/home/kirdyk</value>
+    <value type="QString">KDE_FULL_SESSION=true</value>
+    <value type="QString">KDE_MULTIHEAD=false</value>
+    <value type="QString">KDE_SESSION_UID=1000</value>
+    <value type="QString">KDE_SESSION_VERSION=4</value>
+    <value type="QString">LANG=ru_RU.UTF-8</value>
+    <value type="QString">LANGUAGE=</value>
+    <value type="QString">LD_LIBRARY_PATH=/usr/lib/qtcreator</value>
+    <value type="QString">LOGNAME=kirdyk</value>
+    <value type="QString">PATH=/usr/local/Trolltech/QtEmbedded-4.6.0-generic/bin:/usr/local/bin:/usr/bin:/bin:/usr/games</value>
+    <value type="QString">PWD=/home/kirdyk/Documents</value>
+    <value type="QString">QTDIR=/usr/local/Trolltech/QtEmbedded-4.6.0-generic</value>
+    <value type="QString">QT_PLUGIN_PATH=/home/kirdyk/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
+    <value type="QString">SESSION_MANAGER=local/debian:@/tmp/.ICE-unix/2571,unix/debian:/tmp/.ICE-unix/2571</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=1</value>
+    <value type="QString">SSH_AGENT_PID=2476</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-lVWogF2435/agent.2435</value>
+    <value type="QString">USER=kirdyk</value>
+    <value type="QString">WINDOWPATH=7</value>
+    <value type="QString">XCURSOR_THEME=Oxygen_Black</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
+    <value type="QString">XDG_SESSION_COOKIE=6ebc389e7364e9cd00c2e5354ae45b39-1295638179.132052-193475656</value>
+    <value type="QString">XDM_MANAGED=method=classic</value>
+   </valuelist>
+   <value key="abstractProcess.IgnoreReturnValue" type="bool">false</value>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">-w</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool">true</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/kirdyk/stbtest</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Debug-cleanstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Debug</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-25Xv9GDSTP,guid=5ac6f1bc4ce83bba2e56f4d50000002d</value>
+    <value type="QString">DESKTOP_SESSION=kde</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">DM_CONTROL=/var/run/xdmctl</value>
+    <value type="QString">GS_LIB=/home/kirdyk/.fonts</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/kirdyk/.gtkrc-2.0::/home/kirdyk/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK_MODULES=canberra-gtk-module</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/kirdyk/.gtkrc::/home/kirdyk/.kde/share/config/gtkrc</value>
+    <value type="QString">HOME=/home/kirdyk</value>
+    <value type="QString">KDE_FULL_SESSION=true</value>
+    <value type="QString">KDE_MULTIHEAD=false</value>
+    <value type="QString">KDE_SESSION_UID=1000</value>
+    <value type="QString">KDE_SESSION_VERSION=4</value>
+    <value type="QString">LANG=ru_RU.UTF-8</value>
+    <value type="QString">LANGUAGE=</value>
+    <value type="QString">LD_LIBRARY_PATH=/usr/lib/qtcreator</value>
+    <value type="QString">LOGNAME=kirdyk</value>
+    <value type="QString">PATH=/usr/local/Trolltech/QtEmbedded-4.6.0-generic/bin:/usr/local/bin:/usr/bin:/bin:/usr/games</value>
+    <value type="QString">PWD=/home/kirdyk/Documents</value>
+    <value type="QString">QTDIR=/usr/local/Trolltech/QtEmbedded-4.6.0-generic</value>
+    <value type="QString">QT_PLUGIN_PATH=/home/kirdyk/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
+    <value type="QString">SESSION_MANAGER=local/debian:@/tmp/.ICE-unix/2571,unix/debian:/tmp/.ICE-unix/2571</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=1</value>
+    <value type="QString">SSH_AGENT_PID=2476</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-lVWogF2435/agent.2435</value>
+    <value type="QString">USER=kirdyk</value>
+    <value type="QString">WINDOWPATH=7</value>
+    <value type="QString">XCURSOR_THEME=Oxygen_Black</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
+    <value type="QString">XDG_SESSION_COOKIE=6ebc389e7364e9cd00c2e5354ae45b39-1295638179.132052-193475656</value>
+    <value type="QString">XDM_MANAGED=method=classic</value>
+   </valuelist>
+   <value key="abstractProcess.IgnoreReturnValue" type="bool">true</value>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">clean</value>
+    <value type="QString">-w</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool">true</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/kirdyk/stbtest</value>
+   <value key="cleanConfig" type="bool">true</value>
+   <valuelist key="makeargs" type="QVariantList">
+    <value type="QString">clean</value>
+   </valuelist>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Lr55BYV2ck,guid=4409d1790302316d5e6de2010000002c</value>
+    <value type="QString">DESKTOP_SESSION=kde</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">DM_CONTROL=/var/run/xdmctl</value>
+    <value type="QString">GS_LIB=/home/kirdyk/.fonts</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/kirdyk/.gtkrc-2.0::/home/kirdyk/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK_MODULES=canberra-gtk-module</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/kirdyk/.gtkrc::/home/kirdyk/.kde/share/config/gtkrc</value>
+    <value type="QString">HOME=/home/kirdyk</value>
+    <value type="QString">KDE_FULL_SESSION=true</value>
+    <value type="QString">KDE_MULTIHEAD=false</value>
+    <value type="QString">KDE_SESSION_UID=1000</value>
+    <value type="QString">KDE_SESSION_VERSION=4</value>
+    <value type="QString">LANG=ru_RU.UTF-8</value>
+    <value type="QString">LD_LIBRARY_PATH=/usr/lib/qtcreator</value>
+    <value type="QString">LOGNAME=kirdyk</value>
+    <value type="QString">PATH=/usr/local/Trolltech/QtEmbedded-4.6.0-generic/bin:/usr/local/bin:/usr/bin:/bin:/usr/games</value>
+    <value type="QString">PWD=/home/kirdyk/Documents</value>
+    <value type="QString">QTDIR=/usr/local/Trolltech/QtEmbedded-4.6.0-generic</value>
+    <value type="QString">QT_PLUGIN_PATH=/home/kirdyk/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
+    <value type="QString">SESSION_MANAGER=local/debian:@/tmp/.ICE-unix/2536,unix/debian:/tmp/.ICE-unix/2536</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=1</value>
+    <value type="QString">SSH_AGENT_PID=2442</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-ImHHpx2401/agent.2401</value>
+    <value type="QString">USER=kirdyk</value>
+    <value type="QString">WINDOWPATH=7</value>
+    <value type="QString">XCURSOR_THEME=Oxygen_Black</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
+    <value type="QString">XDG_SESSION_COOKIE=6ebc389e7364e9cd00c2e5354ae45b39-1295896477.780270-940734336</value>
+    <value type="QString">XDM_MANAGED=method=classic</value>
+   </valuelist>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">/home/kirdyk/stbtest/stbtest.pro</value>
+    <value type="QString">-spec</value>
+    <value type="QString">/usr/local/Trolltech/QtEmbedded-4.6.0-generic/mkspecs/qws/linux-sh4-g++</value>
+    <value type="QString">-r</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/local/Trolltech/QtEmbedded-4.6.0-generic/bin/qmake</value>
+   <value key="abstractProcess.enabled" type="bool">false</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/kirdyk/stbtest</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep1</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList">
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Lr55BYV2ck,guid=4409d1790302316d5e6de2010000002c</value>
+    <value type="QString">DESKTOP_SESSION=kde</value>
+    <value type="QString">DISPLAY=:0.0</value>
+    <value type="QString">DM_CONTROL=/var/run/xdmctl</value>
+    <value type="QString">GS_LIB=/home/kirdyk/.fonts</value>
+    <value type="QString">GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/kirdyk/.gtkrc-2.0::/home/kirdyk/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString">GTK_MODULES=canberra-gtk-module</value>
+    <value type="QString">GTK_RC_FILES=/etc/gtk/gtkrc:/home/kirdyk/.gtkrc::/home/kirdyk/.kde/share/config/gtkrc</value>
+    <value type="QString">HOME=/home/kirdyk</value>
+    <value type="QString">KDE_FULL_SESSION=true</value>
+    <value type="QString">KDE_MULTIHEAD=false</value>
+    <value type="QString">KDE_SESSION_UID=1000</value>
+    <value type="QString">KDE_SESSION_VERSION=4</value>
+    <value type="QString">LANG=ru_RU.UTF-8</value>
+    <value type="QString">LD_LIBRARY_PATH=/usr/lib/qtcreator</value>
+    <value type="QString">LOGNAME=kirdyk</value>
+    <value type="QString">PATH=/usr/local/Trolltech/QtEmbedded-4.6.0-generic/bin:/usr/local/bin:/usr/bin:/bin:/usr/games</value>
+    <value type="QString">PWD=/home/kirdyk/Documents</value>
+    <value type="QString">QTDIR=/usr/local/Trolltech/QtEmbedded-4.6.0-generic</value>
+    <value type="QString">QT_PLUGIN_PATH=/home/kirdyk/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
+    <value type="QString">SESSION_MANAGER=local/debian:@/tmp/.ICE-unix/2536,unix/debian:/tmp/.ICE-unix/2536</value>
+    <value type="QString">SHELL=/bin/bash</value>
+    <value type="QString">SHLVL=1</value>
+    <value type="QString">SSH_AGENT_PID=2442</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/ssh-ImHHpx2401/agent.2401</value>
+    <value type="QString">USER=kirdyk</value>
+    <value type="QString">WINDOWPATH=7</value>
+    <value type="QString">XCURSOR_THEME=Oxygen_Black</value>
+    <value type="QString">XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
+    <value type="QString">XDG_SESSION_COOKIE=6ebc389e7364e9cd00c2e5354ae45b39-1295896477.780270-940734336</value>
+    <value type="QString">XDM_MANAGED=method=classic</value>
+   </valuelist>
+   <value key="abstractProcess.IgnoreReturnValue" type="bool">false</value>
+   <valuelist key="abstractProcess.arguments" type="QVariantList">
+    <value type="QString">-w</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString">/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool">true</value>
+   <value key="abstractProcess.workingDirectory" type="QString">/home/kirdyk/stbtest</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-cleanstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+   <value key="cleanConfig" type="bool">true</value>
+   <valuelist key="makeargs" type="QVariantList">
+    <value type="QString">clean</value>
+   </valuelist>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfigurations</variable>
+  <valuelist type="QVariantList">
+   <value type="QString">Debug</value>
+   <value type="QString">Release</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>buildstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString"></value>
+   <value key="mkspec" type="QString"></value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildstep1</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString"></value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildsteps</variable>
+  <valuelist type="QVariantList">
+   <value type="QString">trolltech.qt4projectmanager.qmake</value>
+   <value type="QString">trolltech.qt4projectmanager.make</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>cleanstep0</variable>
+  <valuemap type="QVariantMap">
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString"></value>
+   <value key="clean" type="bool">true</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>cleansteps</variable>
+  <valuelist type="QVariantList">
+   <value type="QString">trolltech.qt4projectmanager.make</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>defaultFileEncoding</variable>
+  <value type="QByteArray">UTF-8</value>
+ </data>
+ <data>
+  <variable>project</variable>
+  <valuemap type="QVariantMap"/>
+ </data>
+</qtcreator>

@@ -1,5 +1,6 @@
 #include "headers/lircthread.h"
-#include <QWSServer>
+#include <QtDebug>
+#include <sys/socket.h>
 
 LircThread::LircThread(QObject *parent):QThread(parent)
 {
@@ -18,8 +19,6 @@ LircThread::~LircThread()
 
 void LircThread::run()
 {
-    QWSServer *srv = QWSServer::instance();
-
     char *code;
     char *c;
     int ret;
@@ -30,21 +29,10 @@ void LircThread::run()
         while((ret=lirc_code2char(cfg,code,&c))==0 &&
               c!=NULL)
         {
-            QString str(c);
 
-            bool guessed = false;
-
-            int key;
-            Qt::KeyboardModifier mod = Qt::NoModifier;
-
-            if(str == "Key Tab Web")
-            {
-                guessed = true;
-                key = Qt::Key_Tab;
-            }
-
-            if(guessed)
-                srv->sendKeyEvent(0, key, mod, true, false);
+            int sz = strlen(code);
+            ::write(lircFd, &sz, sizeof(sz));
+            ::write(lircFd, c, sz);
         }
 
         if(ret==-1) break;

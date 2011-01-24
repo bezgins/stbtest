@@ -17,9 +17,9 @@
    <widget class="QPushButton" name="channel1Button">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>120</y>
-      <width>97</width>
+      <x>150</x>
+      <y>90</y>
+      <width>79</width>
       <height>23</height>
      </rect>
     </property>
@@ -31,8 +31,8 @@
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>120</y>
-      <width>97</width>
+      <y>90</y>
+      <width>79</width>
       <height>23</height>
      </rect>
     </property>

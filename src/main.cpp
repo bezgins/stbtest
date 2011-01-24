@@ -3,8 +3,11 @@
 #include <stbplayer.h>
 #include <signal.h>
 #include <iostream>
+#include <sys/socket.h>
 #include "mainwindow.h"
+#include "lircthread.h"
 
+#include <QtDebug>
 
 int setup_unix_signal_handlers()
 {
@@ -38,22 +41,21 @@ int main(int argc, char *argv[])
     STB_SetTopWin(player, 0);
     STB_SetAspect(player, 2);
 
-//    PIG_Info pig;
-//
-//    pig.state = 0;
-//
-//    STB_SetPIG(player, &pig);
+    int lircFd[2];
 
-//    Viewport_Info vp;
-//    vp.height=376;
-//    vp.width=520;
-//    vp.xpos=200;
-//    vp.ypos=200;
-//
-//    STB_SetViewport(player, &vp);
+    if (::socketpair(AF_UNIX, SOCK_STREAM, 0, lircFd))
+       qFatal("Couldn't create HUP socketpair");
 
     QApplication a(argc, argv);
     MainWindow w;
+
+    w.setLircFd(lircFd[0]);
+
+    LircThread *thread = new LircThread();
+
+    thread->lircFd = lircFd[1];
+
+    thread->start();
 
     w.SetPlayer(player);
 

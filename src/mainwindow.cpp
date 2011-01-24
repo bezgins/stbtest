@@ -3,7 +3,11 @@
 #include <iostream>
 #include <sys/socket.h>
 
+#include <QWSServer>
+
 #include <QMessageBox>
+
+#include <QtDebug>
 
 int MainWindow::sigintFd[2];
 int MainWindow::sigtermFd[2];
@@ -39,7 +43,76 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
     ui->channel1Button->setWindowOpacity(1.0);
     ui->channel2Button->setWindowOpacity(1.0);
+}
 
+void MainWindow::setLircFd(int fd)
+{
+    lircFd = fd;
+
+    snLirc = new QSocketNotifier(lircFd, QSocketNotifier::Read, this);
+    connect(snLirc, SIGNAL(activated(int)), this, SLOT(handleLirc()));
+
+}
+
+void MainWindow::handleLirc()
+{
+    snLirc->setEnabled(false);
+
+    char str[255];
+    int sz;
+
+    ::read(lircFd, &sz, sizeof(sz));
+    ::read(lircFd, str, sz);
+
+    QString cmd(str);
+
+    qDebug() << QString(str);
+
+
+    bool guessed = false;
+
+    int key;
+    Qt::KeyboardModifier mod = Qt::NoModifier;
+
+    QStringList parts = cmd.split(QRegExp("\\s+"), QString::SkipEmptyParts);
+
+    if(parts.at(0) == "Key")
+    {
+        qDebug() << "Key caught";
+
+        if(parts.at(1) == "Tab")
+        {
+            qDebug() << "Tab";
+
+            guessed = true;
+            key = Qt::Key_Tab;
+        }
+        else if(parts.at(1) == "shift-Tab")
+        {
+            qDebug() << "Shift-Tab";
+
+            guessed = true;
+            key = Qt::Key_Tab;
+            mod = Qt::ShiftModifier;
+        }
+        else if(parts.at(1) == "Return")
+        {
+            qDebug() << "Return";
+
+            guessed = true;
+            key = Qt::Key_Space;
+        }
+    }
+
+    if(guessed)
+    {
+        QWSServer *srv = QWSServer::instance();
+
+        srv->sendKeyEvent(-1, key, mod, true, false);
+        srv->sendKeyEvent(-1, key, mod, false, false);
+    }
+
+    snLirc->setEnabled(true);
 }
 
 void MainWindow::intSignalHandler(int)

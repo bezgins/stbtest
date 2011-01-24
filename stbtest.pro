@@ -15,15 +15,18 @@ LIBS += -lvmclient \
     -lSecureMedia \
     -lfilter-cas \
     -lavformat \
-    -lavcodec -llirc_client
+    -lavcodec \
+    -llirc_client
 LIBS += -lavutil \
     -lavcore \
     -lfreetype \
     -lz
 SOURCES += src/main.cpp \
     src/mainwindow.cpp \
-    src/dialog.cpp
+    src/dialog.cpp \
+    src/lircthread.cpp
 HEADERS += headers/mainwindow.h \
-    headers/dialog.h
+    headers/dialog.h \
+    headers/lircthread.h
 FORMS += ui/mainwindow.ui \
     ui/dialog.ui

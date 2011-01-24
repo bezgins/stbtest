@@ -27,6 +27,7 @@
 *.sqlite
 
 *.user
+Makefile
 
 # OS generated files #
 ######################

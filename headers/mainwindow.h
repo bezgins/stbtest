@@ -26,6 +26,8 @@ public:
     static void termSignalHandler(int unused);
     static void intSignalHandler(int unused);
 
+    void setLircFd(int fd);
+
 protected:
     void changeEvent(QEvent *e);
 
@@ -34,16 +36,19 @@ public slots:
     void channel2();
     void handleSigInt();
     void handleSigTerm();
+    void handleLirc();
 
 private:
     Ui::MainWindow *ui;
     HPlayer player;
+    int lircFd;
 
     static int sigintFd[2];
     static int sigtermFd[2];
 
     QSocketNotifier *snInt;
     QSocketNotifier *snTerm;
+    QSocketNotifier *snLirc;
 
 };
 

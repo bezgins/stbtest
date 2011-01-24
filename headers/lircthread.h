@@ -15,7 +15,10 @@ public:
 
     ~LircThread();
 
+    int lircFd;
+
 protected:
+
     virtual void run();
 };
 

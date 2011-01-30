@@ -38,11 +38,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->channel2Button, SIGNAL(clicked()), this,
                         SLOT(channel2()));
 
-    //this->setWindowOpacity(0.1);
-    this->setAttribute(Qt::WA_NoSystemBackground);
-    this->setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
-    ui->channel1Button->setWindowOpacity(1.0);
-    ui->channel2Button->setWindowOpacity(1.0);
+    this->setStyleSheet("background:transparent;");
+    this->setWindowFlags(Qt::FramelessWindowHint);
+    this->setAttribute(Qt::WA_TranslucentBackground);
 }
 
 void MainWindow::setLircFd(int fd)
@@ -101,6 +99,11 @@ void MainWindow::handleLirc()
 
             guessed = true;
             key = Qt::Key_Space;
+        }
+        else if(parts.at(1) == "alt-KeySym:0x6c")
+        {
+            guessed = true;
+            key = Qt::Key_A;
         }
     }
 
@@ -161,13 +164,7 @@ void MainWindow::channel1()
 {
     STB_Stop(player);
 
-    STB_PlaySolution(player, "auto", "udp://225.50.71.1:1234");
-
-//    int aspect = STB_GetAspect(player);
-//
-//    QMessageBox msg;
-//    msg.setText(QString("Aspect is %1").arg(aspect));
-//    msg.exec();
+    STB_PlaySolution(player, "auto", "udp://225.50.71.3:1234");
 }
 
 void MainWindow::channel2()
@@ -187,4 +184,50 @@ void MainWindow::changeEvent(QEvent *e)
     default:
         break;
     }
+}
+
+void MainWindow::switchAspect()
+{
+    unsigned char aspect = STB_GetAspect(player);
+
+    aspect /= 0x10;
+
+    ++aspect;
+
+    aspect = (aspect >5) ? 0 : aspect;
+
+    STB_SetAspect(player, aspect * 0x10);
+
+}
+
+bool MainWindow::processKey(QKeyEvent *event)
+{
+    switch(event->key())
+    {
+    case Qt::Key_A:
+        switchAspect();
+        return true;
+        break;
+    default:
+        break;
+    }
+
+    return false;
+}
+
+bool MainWindow::event(QEvent *event)
+{
+    switch(event->type())
+    {
+    case QEvent::KeyPress:
+        if(processKey(static_cast<QKeyEvent*>(event)))
+        {
+            return true;
+        }
+        break;
+    default:
+        break;
+    }
+
+    return QMainWindow::event(event);
 }

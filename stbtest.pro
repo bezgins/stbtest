@@ -23,10 +23,7 @@ LIBS += -lavutil \
     -lz
 SOURCES += src/main.cpp \
     src/mainwindow.cpp \
-    src/dialog.cpp \
     src/lircthread.cpp
 HEADERS += headers/mainwindow.h \
-    headers/dialog.h \
     headers/lircthread.h
-FORMS += ui/mainwindow.ui \
-    ui/dialog.ui
+FORMS += ui/mainwindow.ui

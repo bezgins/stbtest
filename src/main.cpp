@@ -39,7 +39,31 @@ int main(int argc, char *argv[])
     STB_SetVideoControl(player, 0);
 
     STB_SetTopWin(player, 0);
-    STB_SetAspect(player, 2);
+
+//    PIG_Info pig;
+//
+//    pig.state = 0;
+//    pig.scale = 255;
+//    pig.xpos = 1;
+//    pig.ypos =  1;
+//
+//    STB_SetPIG(player, &pig);
+//
+//    qDebug() << "PIGState" << STB_GetPIGState(player);
+//
+//    STB_GetPIG(player, &pig);
+//
+//    qDebug() << pig.state << ":" << pig.scale << " " << pig.xpos << "x" << pig.ypos;
+
+//    Viewport_Info view;
+//
+//    view.width = 720;
+//    view.height = 576;
+//    view.ypos = 0;
+//
+//    STB_SetViewport(player, &view);
+
+    STB_SetAspect(player, 0x20);
 
     int lircFd[2];
 

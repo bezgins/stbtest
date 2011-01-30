@@ -6,6 +6,7 @@
 
 #include <QMainWindow>
 #include <QSocketNotifier>
+#include <QKeyEvent>
 
 namespace Ui {
     class MainWindow;
@@ -28,8 +29,14 @@ public:
 
     void setLircFd(int fd);
 
+
 protected:
     void changeEvent(QEvent *e);
+    bool event(QEvent *event);
+
+    bool processKey(QKeyEvent *event);
+
+    void switchAspect();
 
 public slots:
     void channel1();

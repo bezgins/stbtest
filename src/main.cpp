@@ -1,13 +1,11 @@
 #include <QtGui/QApplication>
-#include <stbtypes.h>
-#include <stbplayer.h>
 #include <signal.h>
 #include <iostream>
 #include <sys/socket.h>
 #include "mainwindow.h"
 #include "lircthread.h"
 
-#include <QtDebug>
+#include <QTimer>
 
 int setup_unix_signal_handlers()
 {
@@ -33,38 +31,6 @@ int setup_unix_signal_handlers()
 
 int main(int argc, char *argv[])
 {
-    HPlayer player ;
-    player =  STB_CreatePlayer();
-
-    STB_SetVideoControl(player, 0);
-
-    STB_SetTopWin(player, 0);
-
-//    PIG_Info pig;
-//
-//    pig.state = 0;
-//    pig.scale = 255;
-//    pig.xpos = 1;
-//    pig.ypos =  1;
-//
-//    STB_SetPIG(player, &pig);
-//
-//    qDebug() << "PIGState" << STB_GetPIGState(player);
-//
-//    STB_GetPIG(player, &pig);
-//
-//    qDebug() << pig.state << ":" << pig.scale << " " << pig.xpos << "x" << pig.ypos;
-
-//    Viewport_Info view;
-//
-//    view.width = 720;
-//    view.height = 576;
-//    view.ypos = 0;
-//
-//    STB_SetViewport(player, &view);
-
-    STB_SetAspect(player, 0x20);
-
     int lircFd[2];
 
     if (::socketpair(AF_UNIX, SOCK_STREAM, 0, lircFd))
@@ -80,8 +46,6 @@ int main(int argc, char *argv[])
     thread->lircFd = lircFd[1];
 
     thread->start();
-
-    w.SetPlayer(player);
 
     w.show();
 

@@ -4,10 +4,9 @@
 #include <sys/socket.h>
 
 #include <QWSServer>
-
 #include <QMessageBox>
-
-#include <QtDebug>
+#include <QDebug>
+#include <QEvent>
 
 int MainWindow::sigintFd[2];
 int MainWindow::sigtermFd[2];
@@ -15,13 +14,21 @@ int MainWindow::sigtermFd[2];
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    chNum(new ChannelNumberWidget(this)),
+    player(new Player(this)),
+    volume(new VolumeWidget(this))
 {
     if (::socketpair(AF_UNIX, SOCK_STREAM, 0, sigintFd))
        qFatal("Couldn't create HUP socketpair");
 
     if (::socketpair(AF_UNIX, SOCK_STREAM, 0, sigtermFd))
        qFatal("Couldn't create TERM socketpair");
+
+    volume->volume(player->volume());
+
+    connect(volume, SIGNAL(volumeChanged(int)), player, SLOT(volume(int)));
+    connect(chNum, SIGNAL(channel(QString)), player, SLOT(play(QString)));
 
     snInt = new QSocketNotifier(sigintFd[1], QSocketNotifier::Read, this);
     connect(snInt, SIGNAL(activated(int)), this, SLOT(handleSigInt()));
@@ -32,15 +39,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     std::cout << "Started" << std::endl;
 
-    connect(ui->channel1Button, SIGNAL(clicked()), this,
-                        SLOT(channel1()));
-
-    connect(ui->channel2Button, SIGNAL(clicked()), this,
-                        SLOT(channel2()));
-
-    this->setStyleSheet("background:transparent;");
+    this->setStyleSheet("background: rgb(255,255,255)");
     this->setWindowFlags(Qt::FramelessWindowHint);
-    this->setAttribute(Qt::WA_TranslucentBackground);
+
+    this->ui->gridLayout_2->addWidget(chNum, 0, 0, 1, 1);
+    this->ui->gridLayout_2->addWidget(volume, 2, 0, 1, 3);
+
+    this->chNum->current();
 }
 
 void MainWindow::setLircFd(int fd)
@@ -68,11 +73,14 @@ void MainWindow::handleLirc()
 
 
     bool guessed = false;
+    bool custom = false;
 
     int key;
     Qt::KeyboardModifier mod = Qt::NoModifier;
 
     QStringList parts = cmd.split(QRegExp("\\s+"), QString::SkipEmptyParts);
+
+    STBEvent *event;
 
     if(parts.at(0) == "Key")
     {
@@ -105,14 +113,50 @@ void MainWindow::handleLirc()
             guessed = true;
             key = Qt::Key_A;
         }
+        else if(parts.at(1) == "KP_Add")
+        {
+            guessed = true;
+            custom = true;
+            event = new STBVolumeEvent();
+            event->setPayload(1);
+        }
+        else if(parts.at(1) == "minus")
+        {
+            guessed = true;
+            custom = true;
+            event = new STBVolumeEvent();
+            event->setPayload(-1);
+        }
+        else if(parts.at(1) == "Page_Up")
+        {
+            guessed = true;
+            custom = true;
+            event = new STBPageEvent();
+            event->setPayload(1);
+        }
+        else if(parts.at(1) == "Page_Down")
+        {
+            guessed = true;
+            custom = true;
+            event = new STBPageEvent();
+            event->setPayload(-1);
+        }
     }
 
     if(guessed)
     {
-        QWSServer *srv = QWSServer::instance();
+        if(!custom)
+        {
+            QWSServer *srv = QWSServer::instance();
 
-        srv->sendKeyEvent(-1, key, mod, true, false);
-        srv->sendKeyEvent(-1, key, mod, false, false);
+            srv->sendKeyEvent(-1, key, mod, true, false);
+            srv->sendKeyEvent(-1, key, mod, false, false);
+        }
+        else
+        {
+            QCoreApplication *app = QApplication::instance();
+            app->sendEvent(this, event);
+        }
     }
 
     snLirc->setEnabled(true);
@@ -154,24 +198,18 @@ void MainWindow::handleSigInt()
 
 MainWindow::~MainWindow()
 {
-    STB_Stop(player);
-    STB_ReleasePlayer(player);
-
+    delete player;
     delete ui;
 }
 
 void MainWindow::channel1()
 {
-    STB_Stop(player);
-
-    STB_PlaySolution(player, "auto", "udp://225.50.71.3:1234");
+    player->play("udp://225.50.71.3:1234");
 }
 
 void MainWindow::channel2()
 {
-    STB_Stop(player);
-
-    STB_PlaySolution(player, "auto", "udp://225.50.64.1:1234");
+    player->play("udp://225.50.64.1:1234");
 }
 
 void MainWindow::changeEvent(QEvent *e)
@@ -188,16 +226,7 @@ void MainWindow::changeEvent(QEvent *e)
 
 void MainWindow::switchAspect()
 {
-    unsigned char aspect = STB_GetAspect(player);
-
-    aspect /= 0x10;
-
-    ++aspect;
-
-    aspect = (aspect >5) ? 0 : aspect;
-
-    STB_SetAspect(player, aspect * 0x10);
-
+    player->switchAspect();
 }
 
 bool MainWindow::processKey(QKeyEvent *event)
@@ -215,18 +244,46 @@ bool MainWindow::processKey(QKeyEvent *event)
     return false;
 }
 
-bool MainWindow::event(QEvent *event)
+bool MainWindow::processSTBEvent(STBEvent *event)
 {
     switch(event->type())
     {
-    case QEvent::KeyPress:
+    case STBEvent::Volume:
+            volume->volumeShift(event->getPayload());;
+            return true;
+            break;
+    case STBEvent::Page:
+            if(event->getPayload() == 1)
+                chNum->channelUp();
+            else
+                chNum->channelDown();
+            delete event;
+            return true;
+            break;
+    default:
+            break;
+    }
+
+    return false;
+}
+
+bool MainWindow::event(QEvent *event)
+{
+    QEvent::Type type = event->type();
+
+    if(type == QEvent::KeyPress)
+    {
         if(processKey(static_cast<QKeyEvent*>(event)))
         {
             return true;
         }
-        break;
-    default:
-        break;
+    }
+    else if(type >= QEvent::User)
+    {
+        if(processSTBEvent(dynamic_cast<STBEvent*>(event)))
+        {
+            return true;
+        }
     }
 
     return QMainWindow::event(event);

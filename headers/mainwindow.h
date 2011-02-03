@@ -1,12 +1,15 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <stbtypes.h>
-#include <stbplayer.h>
-
 #include <QMainWindow>
 #include <QSocketNotifier>
 #include <QKeyEvent>
+
+#include "volumewidget.h"
+#include "channelnumberwidget.h"
+#include "stbevent.h"
+#include "player.h"
+
 
 namespace Ui {
     class MainWindow;
@@ -18,7 +21,7 @@ public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void SetPlayer(HPlayer player)
+    void SetPlayer(Player *player)
     {
         this->player = player;
     }
@@ -36,6 +39,8 @@ protected:
 
     bool processKey(QKeyEvent *event);
 
+    bool processSTBEvent(STBEvent *event);
+
     void switchAspect();
 
 public slots:
@@ -47,7 +52,10 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
-    HPlayer player;
+    ChannelNumberWidget *chNum;
+    Player *player;
+    VolumeWidget *volume;
+
     int lircFd;
 
     static int sigintFd[2];
@@ -56,7 +64,6 @@ private:
     QSocketNotifier *snInt;
     QSocketNotifier *snTerm;
     QSocketNotifier *snLirc;
-
 };
 
 #endif // MAINWINDOW_H

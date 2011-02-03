@@ -23,7 +23,18 @@ LIBS += -lavutil \
     -lz
 SOURCES += src/main.cpp \
     src/mainwindow.cpp \
-    src/lircthread.cpp
+    src/lircthread.cpp \
+    src/stbevent.cpp \
+    src/player.cpp \
+    src/volumewidget.cpp \
+    src/channelnumberwidget.cpp
 HEADERS += headers/mainwindow.h \
-    headers/lircthread.h
-FORMS += ui/mainwindow.ui
+    headers/lircthread.h \
+    headers/stbevent.h \
+    headers/player.h \
+    headers/volumewidget.h \
+    headers/channelnumberwidget.h
+FORMS += ui/mainwindow.ui \
+    ui/volumewidget.ui \
+    ui/channelnumberwidget.ui
+OTHER_FILES += chnls.txt

@@ -9,7 +9,8 @@ OBJECTS_DIR = obj
 UI_DIR = uic
 INCLUDEPATH += headers
 INCLUDEPATH += /home/kirdyk/X-sh4/include
-LIBS += -L/home/kirdyk/X-sh4/lib
+LIBS += -L/home/kirdyk/X-sh4/lib \
+    -Wl,-rpath,/home/default
 LIBS += -lstbplayer
 LIBS += -lvmclient \
     -lSecureMedia \
@@ -27,14 +28,17 @@ SOURCES += src/main.cpp \
     src/stbevent.cpp \
     src/player.cpp \
     src/volumewidget.cpp \
-    src/channelnumberwidget.cpp
+    src/channelnumberwidget.cpp \
+    src/lirchandler.cpp
 HEADERS += headers/mainwindow.h \
     headers/lircthread.h \
     headers/stbevent.h \
     headers/player.h \
     headers/volumewidget.h \
-    headers/channelnumberwidget.h
+    headers/channelnumberwidget.h \
+    headers/lirchandler.h
 FORMS += ui/mainwindow.ui \
     ui/volumewidget.ui \
     ui/channelnumberwidget.ui
 OTHER_FILES += chnls.txt
+RESOURCES += res.qrc

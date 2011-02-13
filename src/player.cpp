@@ -11,6 +11,8 @@ Player::Player(QObject *parent)
 
     STB_SetTopWin(player, 0);
 
+    STB_SetMode(player, 1);
+
     STB_SetAspect(player, 0x10);
 
     STB_SetChromaKey(player, 0xffffff, 0xffffff);

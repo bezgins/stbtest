@@ -44,17 +44,13 @@ protected:
     void switchAspect();
 
 public slots:
-    void channel1();
-    void channel2();
     void handleSigInt();
     void handleSigTerm();
     void handleLirc();
 
 private:
     Ui::MainWindow *ui;
-    ChannelNumberWidget *chNum;
     Player *player;
-    VolumeWidget *volume;
 
     int lircFd;
 
@@ -64,6 +60,12 @@ private:
     QSocketNotifier *snInt;
     QSocketNotifier *snTerm;
     QSocketNotifier *snLirc;
+
+public:
+    ChannelNumberWidget *chNum;
+    VolumeWidget *volume;
+
+    void init();
 };
 
 #endif // MAINWINDOW_H

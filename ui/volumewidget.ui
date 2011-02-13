@@ -17,7 +17,22 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgba(255, 255, 255, 1%);</string>
+   <string notr="true">QWidget
+{
+	background: black;
+}
+
+QProgressBar {
+	margin: 5px;
+	border: 2px solid black;
+    border-radius: 5px;
+}
+
+QProgressBar::chunk {
+     background-color: green;
+     width: 30px;
+     margin: 2px;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -33,7 +48,7 @@ background: transparent;</string>
       <enum>QFrame::NoFrame</enum>
      </property>
      <property name="numDigits">
-      <number>2</number>
+      <number>3</number>
      </property>
      <property name="segmentStyle">
       <enum>QLCDNumber::Flat</enum>

@@ -3,10 +3,11 @@
 #include <iostream>
 #include <sys/socket.h>
 
-#include <QWSServer>
 #include <QMessageBox>
 #include <QDebug>
 #include <QEvent>
+
+#include "lirchandler.h"
 
 int MainWindow::sigintFd[2];
 int MainWindow::sigtermFd[2];
@@ -15,9 +16,7 @@ int MainWindow::sigtermFd[2];
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    chNum(new ChannelNumberWidget(this)),
-    player(new Player(this)),
-    volume(new VolumeWidget(this))
+    player(new Player(this))
 {
     if (::socketpair(AF_UNIX, SOCK_STREAM, 0, sigintFd))
        qFatal("Couldn't create HUP socketpair");
@@ -25,10 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
     if (::socketpair(AF_UNIX, SOCK_STREAM, 0, sigtermFd))
        qFatal("Couldn't create TERM socketpair");
 
-    volume->volume(player->volume());
-
-    connect(volume, SIGNAL(volumeChanged(int)), player, SLOT(volume(int)));
-    connect(chNum, SIGNAL(channel(QString)), player, SLOT(play(QString)));
 
     snInt = new QSocketNotifier(sigintFd[1], QSocketNotifier::Read, this);
     connect(snInt, SIGNAL(activated(int)), this, SLOT(handleSigInt()));
@@ -42,11 +37,21 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setStyleSheet("background: rgb(255,255,255)");
     this->setWindowFlags(Qt::FramelessWindowHint);
 
+}
+
+void MainWindow::init()
+{
+    volume->volume(player->volume());
+
+    connect(volume, SIGNAL(volumeChanged(int)), player, SLOT(volume(int)));
+    connect(chNum, SIGNAL(channel(QString)), player, SLOT(play(QString)));
+
     this->ui->gridLayout_2->addWidget(chNum, 0, 0, 1, 1);
     this->ui->gridLayout_2->addWidget(volume, 2, 0, 1, 3);
 
     this->chNum->current();
 }
+
 
 void MainWindow::setLircFd(int fd)
 {
@@ -67,97 +72,7 @@ void MainWindow::handleLirc()
     ::read(lircFd, &sz, sizeof(sz));
     ::read(lircFd, str, sz);
 
-    QString cmd(str);
-
-    qDebug() << QString(str);
-
-
-    bool guessed = false;
-    bool custom = false;
-
-    int key;
-    Qt::KeyboardModifier mod = Qt::NoModifier;
-
-    QStringList parts = cmd.split(QRegExp("\\s+"), QString::SkipEmptyParts);
-
-    STBEvent *event;
-
-    if(parts.at(0) == "Key")
-    {
-        qDebug() << "Key caught";
-
-        if(parts.at(1) == "Tab")
-        {
-            qDebug() << "Tab";
-
-            guessed = true;
-            key = Qt::Key_Tab;
-        }
-        else if(parts.at(1) == "shift-Tab")
-        {
-            qDebug() << "Shift-Tab";
-
-            guessed = true;
-            key = Qt::Key_Tab;
-            mod = Qt::ShiftModifier;
-        }
-        else if(parts.at(1) == "Return")
-        {
-            qDebug() << "Return";
-
-            guessed = true;
-            key = Qt::Key_Space;
-        }
-        else if(parts.at(1) == "alt-KeySym:0x6c")
-        {
-            guessed = true;
-            key = Qt::Key_A;
-        }
-        else if(parts.at(1) == "KP_Add")
-        {
-            guessed = true;
-            custom = true;
-            event = new STBVolumeEvent();
-            event->setPayload(1);
-        }
-        else if(parts.at(1) == "minus")
-        {
-            guessed = true;
-            custom = true;
-            event = new STBVolumeEvent();
-            event->setPayload(-1);
-        }
-        else if(parts.at(1) == "Page_Up")
-        {
-            guessed = true;
-            custom = true;
-            event = new STBPageEvent();
-            event->setPayload(1);
-        }
-        else if(parts.at(1) == "Page_Down")
-        {
-            guessed = true;
-            custom = true;
-            event = new STBPageEvent();
-            event->setPayload(-1);
-        }
-    }
-
-    if(guessed)
-    {
-        if(!custom)
-        {
-            QWSServer *srv = QWSServer::instance();
-
-            srv->sendKeyEvent(-1, key, mod, true, false);
-            srv->sendKeyEvent(-1, key, mod, false, false);
-        }
-        else
-        {
-            QCoreApplication *app = QApplication::instance();
-            app->sendEvent(this, event);
-        }
-    }
+    LircHandler::instance()->handle(this, QString(str));
 
     snLirc->setEnabled(true);
 }
@@ -202,16 +117,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::channel1()
-{
-    player->play("udp://225.50.71.3:1234");
-}
-
-void MainWindow::channel2()
-{
-    player->play("udp://225.50.64.1:1234");
-}
-
 void MainWindow::changeEvent(QEvent *e)
 {
     QMainWindow::changeEvent(e);
@@ -231,14 +136,11 @@ void MainWindow::switchAspect()
 
 bool MainWindow::processKey(QKeyEvent *event)
 {
-    switch(event->key())
+    if(event->key() >= Qt::Key_0 && event->key() <= Qt::Key_9)
     {
-    case Qt::Key_A:
-        switchAspect();
+        chNum->number(event->key() - 0x30);
+        event->setAccepted(true);
         return true;
-        break;
-    default:
-        break;
     }
 
     return false;
@@ -257,7 +159,10 @@ bool MainWindow::processSTBEvent(STBEvent *event)
                 chNum->channelUp();
             else
                 chNum->channelDown();
-            delete event;
+            return true;
+            break;
+    case STBEvent::Aspect:
+            switchAspect();
             return true;
             break;
     default:

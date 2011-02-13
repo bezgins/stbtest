@@ -30,19 +30,22 @@ protected:
 signals:
     void channel(int value);
     void channel(QString value);
+    void channelNum(int value);
 
 public slots:
-
     void channelUp();
     void channelDown();
-
     void current();
+    void number(int digit);
+    void tryChannel(int number);
 
 private:
     Ui::ChannelNumberWidget *ui;
     int currentChannel;
     std::vector<Channel> channels;
     int timer;
+    bool edit;
+    int num;
 };
 
 #endif // CHANNELNUMBERWIDGET_H

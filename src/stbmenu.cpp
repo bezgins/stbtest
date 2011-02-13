@@ -8,8 +8,30 @@ STBMenu::STBMenu(QWidget *parent) :
     ui->setupUi(this);
 }
 
+void STBMenu::init()
+{
+    channelsMenu = new QMenu();
+    addActions();
+}
+
+void STBMenu::addActions()
+{
+    QAction * action = new QAction(QString().fromWCharArray(L"Россия 24"), this);
+
+    QMenu *menu = channelsMenu->addMenu(QString().fromWCharArray(L"Любимые"));
+    menu->addAction(action);
+
+    action = new QAction(QString().fromWCharArray(L"Россия 2"), this);
+    menu->addAction(action);
+
+
+    this->ui->channelsButton->setMenu(channelsMenu);
+}
+
 STBMenu::~STBMenu()
 {
+    delete channelsMenu;
+
     delete ui;
 }
 

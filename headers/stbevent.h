@@ -11,7 +11,8 @@ public:
     {
         Generic = QEvent::User + 1,
         Volume,
-        Page
+        Page,
+        Aspect
     };
 
 
@@ -50,5 +51,6 @@ public:
 
     }
 };
+
 
 #endif // STBEVENT_H

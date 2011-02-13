@@ -7,6 +7,9 @@
 
 #include <QTimer>
 
+#include "volumewidget.h"
+#include "channelnumberwidget.h"
+
 int setup_unix_signal_handlers()
 {
     struct sigaction sigint, term;
@@ -37,7 +40,16 @@ int main(int argc, char *argv[])
        qFatal("Couldn't create HUP socketpair");
 
     QApplication a(argc, argv);
+
     MainWindow w;
+
+    VolumeWidget vol(&w);
+    ChannelNumberWidget ch(&w);
+
+    w.volume = &vol;
+    w.chNum = &ch;
+
+    w.init();
 
     w.setLircFd(lircFd[0]);
 

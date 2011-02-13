@@ -15,6 +15,21 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QPushButton{
+
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(115, 156, 225, 255), stop:1 rgba(255, 255, 255, 255));
+	border-style: none;
+	border-width: 2px;
+	border-radius: 10px;
+	border-color: black;
+	font: bold 14px;
+	padding: 6px;
+}
+
+QPushButton:focus{
+	background-color: rgb(85, 255, 255);
+}
+
+QMenu {
 	background-color: rgb(192, 250, 255);
 	border-style: outset;
 	border-width: 2px;
@@ -22,7 +37,12 @@
 	border-color: black;
 	font: bold 14px;
 	padding: 6px;
-}</string>
+ }
+
+QPushButton:selected{
+	background-color: rgb(85, 255, 255);
+}
+</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="spacing">

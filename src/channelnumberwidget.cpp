@@ -2,33 +2,46 @@
 #include "ui_channelnumberwidget.h"
 
 #include <QDebug>
+#include <QFile>
 
 ChannelNumberWidget::ChannelNumberWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ChannelNumberWidget)
 {
     Channel ch;
+    int number = 0;
 
-    ch.number = 1;
-    ch.url = "udp://225.50.71.3:1234";
+    QFile chnls("./chnls.txt");
+    QString line;
 
-    channels.push_back(ch);
+    if(chnls.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QTextStream t( &chnls );
 
-    ch.number = 2;
-    ch.url = "udp://225.50.64.1:1234";
+        while(!t.atEnd())
+        {
+            line = t.readLine();
 
-    channels.push_back(ch);
+            number++;
 
-    ch.number = 112;
-    ch.url = "udp://225.50.68.3:1234";
+            ch.number = number;
+            ch.url = line;
 
-    channels.push_back(ch);
+            channels.push_back(ch);
+
+            qDebug() << line << " read";
+        }
+
+        chnls.close();
+    }
 
     currentChannel = 1;
 
     ui->setupUi(this);
 
     connect(this, SIGNAL(channel(int)), this->ui->lcdNumber, SLOT(display(int)));
+
+    edit = false;
 
     this->setVisible(false);
 }
@@ -52,11 +65,13 @@ void ChannelNumberWidget::changeEvent(QEvent *e)
 
 void ChannelNumberWidget::current()
 {
+    edit = false;
     showChannel();
 }
 
 void ChannelNumberWidget::channelUp()
 {
+    edit = false;
     currentChannel++;
 
     showChannel();
@@ -64,9 +79,33 @@ void ChannelNumberWidget::channelUp()
 
 void ChannelNumberWidget::channelDown()
 {
+    edit = false;
     currentChannel--;
 
     showChannel();
+}
+
+void ChannelNumberWidget::number(int digit)
+{
+    this->setVisible(true);
+
+    if(!edit)
+    {
+        num = 0;
+        edit = true;
+    }
+
+    num = num * 10 + digit;
+
+    if(num > 999)
+        num = digit;
+
+    emit channel(num);
+
+    if(timer)
+        killTimer(timer);
+
+    timer = this->startTimer(2000);
 }
 
 void ChannelNumberWidget::showChannel()
@@ -93,5 +132,25 @@ void ChannelNumberWidget::timerEvent(QTimerEvent *e)
     killTimer(timer);
     timer = 0;
 
+    if(edit)
+    {
+        tryChannel(num);
+        edit = false;
+    }
+
     this->setVisible(false);
+}
+
+void ChannelNumberWidget::tryChannel(int number)
+{
+    for(std::vector<Channel>::iterator it = channels.begin(); it != channels.end(); it++)
+    {
+        if(it->number == number)
+        {
+            currentChannel = it->number;
+            emit channel(it->url);
+            emit channel(it->number);
+            break;
+        }
+    }
 }

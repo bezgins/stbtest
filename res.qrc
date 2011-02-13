@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/img/xmenu">
+        <file>res/voicecall.png</file>
+        <file>res/configure.png</file>
+        <file>res/media-optical-video.png</file>
+        <file>res/tool-animator.png</file>
+        <file>res/user-identity.png</file>
+        <file>res/video-television.png</file>
+        <file>res/draw-arrow-forward.png</file>
+    </qresource>
+</RCC>

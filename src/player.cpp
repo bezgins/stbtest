@@ -3,6 +3,8 @@
 Player::Player(QObject *parent)
     :QObject(parent)
 {
+    standby = false;
+
     volume_timer = new QTimer();
 
     player =  STB_CreatePlayer();
@@ -59,4 +61,11 @@ void Player::volume(int volume)
     value = (value < 0 )? 0 : value;
 
     STB_SetVolume(player, value);
+}
+
+void Player::power()
+{
+    STB_StandBy(player, (standby)? 0 : 1);
+
+    standby = !standby;
 }

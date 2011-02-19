@@ -38,6 +38,8 @@ void LircHandler::createEventMap()
     eventMap["minus"]           = LircEvent::create(false, STBEvent::Volume,   -1);
     eventMap["Page_Up"]         = LircEvent::create(false, STBEvent::Page,      1);
     eventMap["Page_Down"]       = LircEvent::create(false, STBEvent::Page,     -1);
+
+    eventMap["alt-KeySym:0x75"] = LircEvent::create(false, STBEvent::Power,     0);
 }
 
 void LircHandler::handle(QObject* who, QString lircMsg)

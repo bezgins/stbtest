@@ -15,6 +15,9 @@ class Player : public QObject
     Q_OBJECT
     HPlayer player;
     QTimer *volume_timer;
+
+    bool standby;
+
 public:
     Player(QObject *parent = 0);
     ~Player();
@@ -26,12 +29,18 @@ public:
 
     void switchAspect();
 
+    bool isStandBy()
+    {
+        return standby;
+    }
+
     unsigned char volume();
 
 public slots:
     void volume(int volume);
     void play(QString url);
 
+    void power();
 };
 
 #endif // PLAYER_H

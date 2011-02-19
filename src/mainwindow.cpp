@@ -165,6 +165,14 @@ bool MainWindow::processSTBEvent(STBEvent *event)
             switchAspect();
             return true;
             break;
+    case STBEvent::Power:
+            player->power();
+            if(!player->isStandBy())
+            {
+                chNum->current();
+            }
+            return true;
+            break;
     default:
             break;
     }

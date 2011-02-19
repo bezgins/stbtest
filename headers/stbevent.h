@@ -12,7 +12,8 @@ public:
         Generic = QEvent::User + 1,
         Volume,
         Page,
-        Aspect
+        Aspect,
+        Power
     };
 
 
